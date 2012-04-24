@@ -299,7 +299,8 @@ versioned string.
 
 A *CACHE_BUSTER* settings can be added to the main *MEDIASYNC* settings 
 dict to add a query string parameter to all media URLs. The cache buster can 
-either be a value or a callable which is passed the media URL as a parameter.
+either be a value or a callable which is passed the media URL and path as a 
+parameter.
 
 ::
 
@@ -314,6 +315,14 @@ multi-threaded or multi-node setup, you'll want to be careful about using a
 time-based cache buster value. Each worker/thread will probably have a slightly 
 different value for datetime.now(), which means your users will find themselves
 having cache misses randomly from page to page. 
+
+A simple cachebuster function is provided with mediasync. Simply import it and set 
+it as your *CACHE_BUSTER* callable:
+
+::
+
+    from mediasync.utils import get_file_mtime
+    MEDIASYNC['CACHE_BUSTER'] = get_file_mtime
 
 Rackspace Cloud Files
 ---------------------

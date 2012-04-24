@@ -80,7 +80,7 @@ class BaseTagNode(template.Node):
             # Cache busters help tell the client to re-download the file after
             # a change. This can either be a callable or a constant defined
             # in settings.py.
-            cb_val = cb(url) if callable(cb) else cb
+            cb_val = cb(url, path) if callable(cb) else cb
             url = "%s?%s" % (url, cb_val)
 
         return msettings['URL_PROCESSOR'](url)
